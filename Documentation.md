@@ -40,3 +40,7 @@ Here's an example of how you can include the theme in your `_Layout.cshtml` file
     <!-- Your application content goes here -->
 </body>
 </html>
+
+## Acknowledgements
+
+This project utilizes icons from [icons.getbootstrap.com](https://icons.getbootstrap.com/), a collection of free icons provided by Bootstrap.
