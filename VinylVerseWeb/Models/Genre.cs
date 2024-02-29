@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using VinylVerseWeb.Data.Validation;
 
 namespace VinylVerseWeb.Models
 {
@@ -8,8 +10,12 @@ namespace VinylVerseWeb.Models
         public int Id { get; set; }
 
         [Required]
+        [MaxLength(Validate.GenreNameMaxLength)]
+        [DisplayName("Genre Name")]
         public string Name { get; set; } = null!;
 
+        [Range(Validate.GenreDisplayOrderMinValue, Validate.GenreDisplayOrderMaxValue,ErrorMessage = Validate.GenreDisplayOrderErrorMessage)]
+        [DisplayName("Display Order")]
         public int DisplayOrder { get; set; }
     }
 }
