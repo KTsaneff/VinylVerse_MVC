@@ -39,7 +39,8 @@ Here's an example of how you can include the theme in your `_Layout.cshtml` file
 <body>
     <!-- Your application content goes here -->
 </body>
-</html>```
+</html>
+```
 
 ## Acknowledgements
 
