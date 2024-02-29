@@ -1,1 +1,24 @@
-﻿<h1>Category List</h1>
+﻿@model List<Genre>
+
+<h1>Genre List</h1>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>
+                Genre Name
+            </th>
+            <th>
+                Display Order
+            </th>
+        </tr>
+    </thead>
+   <tbody>
+        @foreach(var genre in Model.OrderBy(u => u.DisplayOrder))
+        {
+            <tr>
+                <td>@genre.Name</td>
+                <td>@genre.DisplayOrder</td>
+            </tr>
+        }        
+   </tbody>
+</table>
