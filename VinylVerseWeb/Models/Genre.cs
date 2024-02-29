@@ -2,7 +2,7 @@
 
 namespace VinylVerseWeb.Models
 {
-    public class Category
+    public class Genre
     {
         [Key]
         public int Id { get; set; }
