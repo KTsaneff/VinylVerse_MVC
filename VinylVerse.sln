@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34607.119
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VinylVerseWeb", "VinylVerseWeb\VinylVerseWeb.csproj", "{70C24350-6600-425D-90BD-A5A3B5023E5F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VinylVerseWeb", "VinylVerseWeb\VinylVerseWeb.csproj", "{70C24350-6600-425D-90BD-A5A3B5023E5F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VynilVerseWebRazor_Temp", "VynilVerseWebRazor_Temp\VynilVerseWebRazor_Temp.csproj", "{1F41D44F-34A8-4209-95DF-95F01FD76855}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{70C24350-6600-425D-90BD-A5A3B5023E5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70C24350-6600-425D-90BD-A5A3B5023E5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70C24350-6600-425D-90BD-A5A3B5023E5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F41D44F-34A8-4209-95DF-95F01FD76855}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F41D44F-34A8-4209-95DF-95F01FD76855}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F41D44F-34A8-4209-95DF-95F01FD76855}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F41D44F-34A8-4209-95DF-95F01FD76855}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
