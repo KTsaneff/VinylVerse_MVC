@@ -45,3 +45,18 @@ Here's an example of how you can include the theme in your `_Layout.cshtml` file
 ## Acknowledgements
 
 This project utilizes icons from [icons.getbootstrap.com](https://icons.getbootstrap.com/), a collection of free icons provided by Bootstrap.
+
+# Toastr Installation Guide
+
+To add Toastr to your project, follow these steps:
+
+1. Download Toastr from the official GitHub repository or install it via a package manager like npm or yarn.
+
+2. Place the `toastr.js` and `toastr.css` files in your project's `js` and `css` directories, respectively.
+
+3. Include the following `<script>` and `<link>` tags in your HTML files to reference Toastr:
+
+   ```html
+   <link href="/path/to/toastr.css" rel="stylesheet" />
+   <script src="/path/to/toastr.js"></script>
+```
