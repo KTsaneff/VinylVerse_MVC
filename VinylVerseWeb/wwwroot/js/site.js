@@ -2,3 +2,10 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
+$(document).ready(function () {
+    toastr.options = {
+        "positionClass": "toast-top-right",
+        "preventDuplicates": true,
+        // Other options as needed
+    };
+});
