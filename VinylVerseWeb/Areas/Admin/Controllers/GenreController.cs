@@ -3,8 +3,9 @@ using VynilVerse.DataAccess.Data;
 using VynilVerse.DataAccess.Repository.Contracts;
 using VynilVerse.Models;
 
-namespace VinylVerseWeb.Controllers
+namespace VinylVerseWeb.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class GenreController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -47,14 +48,14 @@ namespace VinylVerseWeb.Controllers
 
         public IActionResult Edit(int? id)
         {
-            if(id == null || id == 0)
+            if (id == null || id == 0)
             {
                 return NotFound();
             }
 
             Genre? genre = _unitOfWork.Genre.Get(x => x.Id == id);
 
-            if(genre == null)
+            if (genre == null)
             {
                 return NotFound();
             }
@@ -64,7 +65,7 @@ namespace VinylVerseWeb.Controllers
 
         [HttpPost]
         public IActionResult Edit(Genre genre)
-        {           
+        {
             if (ModelState.IsValid)
             {
                 _unitOfWork.Genre.Update(genre);
@@ -98,10 +99,17 @@ namespace VinylVerseWeb.Controllers
         public IActionResult DeletePost(int? id)
         {
             Genre genreToDelete = _unitOfWork.Genre.Get(x => x.Id == id);
-            if(genreToDelete == null)
+            if (genreToDelete == null)
             {
                 return NotFound();
             }
+
+            if (_unitOfWork.Album.GetAll().Any(a => a.GenreId == id))
+            {
+                TempData["error"] = "Cannot delete genre because it has associated albums.";
+                return RedirectToAction("Index");
+            }
+
             _unitOfWork.Genre.Remove(genreToDelete);
             _unitOfWork.Save();
 

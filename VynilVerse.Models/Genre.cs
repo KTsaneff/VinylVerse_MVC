@@ -6,6 +6,11 @@ namespace VynilVerse.Models
 {
     public class Genre
     {
+        public Genre()
+        {
+            Albums = new List<Album>(); 
+        }
+
         [Key]
         public int Id { get; set; }
 
@@ -17,5 +22,7 @@ namespace VynilVerse.Models
         [Range(Validate.GenreDisplayOrderMinValue, Validate.GenreDisplayOrderMaxValue, ErrorMessage = Validate.GenreDisplayOrderErrorMessage)]
         [DisplayName("Display Order")]
         public int DisplayOrder { get; set; }
+
+        public virtual ICollection<Album> Albums { get; set; }
     }
 }
