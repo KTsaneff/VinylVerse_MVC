@@ -1,22 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using VynilVerse.DataAccess.Data;
-using VynilVerse.DataAccess.Repository;
+using VynilVerse.DataAccess.Repository.Contracts;
 using VynilVerse.Models;
 
 namespace VinylVerseWeb.Controllers
 {
     public class GenreController : Controller
     {
-        private readonly IGenreRepository _repo;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public GenreController(IGenreRepository repo)
+        public GenreController(IUnitOfWork unitOfWork)
         {
-            _repo = repo;
+            _unitOfWork = unitOfWork;
         }
 
         public IActionResult Index()
         {
-            List<Genre> genres = _repo.GetAll().ToList();
+            List<Genre> genres = _unitOfWork.Genre.GetAll().ToList();
             return View(genres);
         }
 
@@ -35,8 +35,8 @@ namespace VinylVerseWeb.Controllers
 
             if (ModelState.IsValid)
             {
-                _repo.Add(genre);
-                _repo.Save();
+                _unitOfWork.Genre.Add(genre);
+                _unitOfWork.Save();
 
                 TempData["success"] = "Genre added successfully";
 
@@ -52,7 +52,7 @@ namespace VinylVerseWeb.Controllers
                 return NotFound();
             }
 
-            Genre? genre = _repo.Get(x => x.Id == id);
+            Genre? genre = _unitOfWork.Genre.Get(x => x.Id == id);
 
             if(genre == null)
             {
@@ -67,8 +67,8 @@ namespace VinylVerseWeb.Controllers
         {           
             if (ModelState.IsValid)
             {
-                _repo.Update(genre);
-                _repo.Save();
+                _unitOfWork.Genre.Update(genre);
+                _unitOfWork.Save();
 
                 TempData["success"] = "Genre updated successfully";
 
@@ -84,7 +84,7 @@ namespace VinylVerseWeb.Controllers
                 return NotFound();
             }
 
-            Genre? genre = _repo.Get(x => x.Id == id);
+            Genre? genre = _unitOfWork.Genre.Get(x => x.Id == id);
 
             if (genre == null)
             {
@@ -97,13 +97,13 @@ namespace VinylVerseWeb.Controllers
         [HttpPost, ActionName("Delete")]
         public IActionResult DeletePost(int? id)
         {
-            Genre genreToDelete = _repo.Get(x => x.Id == id);
+            Genre genreToDelete = _unitOfWork.Genre.Get(x => x.Id == id);
             if(genreToDelete == null)
             {
                 return NotFound();
             }
-            _repo.Remove(genreToDelete);
-            _repo.Save();
+            _unitOfWork.Genre.Remove(genreToDelete);
+            _unitOfWork.Save();
 
             TempData["success"] = "Genre deleted successfully";
 

@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using VynilVerse.DataAccess.Data;
 using VynilVerse.DataAccess.Repository;
+using VynilVerse.DataAccess.Repository.Contracts;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +12,7 @@ builder.Services
     .UseSqlServer(builder.Configuration
     .GetConnectionString("DefaultConnection")));
 
-builder.Services.AddScoped<IGenreRepository, GenreRepository>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();
 

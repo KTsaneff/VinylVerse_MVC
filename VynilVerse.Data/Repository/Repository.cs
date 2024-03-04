@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using VynilVerse.DataAccess.Data;
+using VynilVerse.DataAccess.Repository.Contracts;
 
 namespace VynilVerse.DataAccess.Repository
 {

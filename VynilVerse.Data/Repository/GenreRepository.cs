@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using VynilVerse.DataAccess.Data;
+using VynilVerse.DataAccess.Repository.Contracts;
 using VynilVerse.Models;
 
 namespace VynilVerse.DataAccess.Repository
@@ -12,12 +13,6 @@ namespace VynilVerse.DataAccess.Repository
         {
             _context = context;
         }
-
-        public void Save()
-        {
-            _context.SaveChanges();
-        }
-
         public void Update(Genre genre)
         {
             _context.Genres.Update(genre);
