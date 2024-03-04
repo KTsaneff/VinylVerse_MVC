@@ -11,5 +11,10 @@ namespace VynilVerse.DataAccess.Repository
         {
             _context = context;
         }
+
+        public void Update(Album album)
+        {
+            _context.Albums.Update(album);
+        }
     }
 }

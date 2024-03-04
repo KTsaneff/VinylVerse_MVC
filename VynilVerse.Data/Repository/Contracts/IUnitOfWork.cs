@@ -6,6 +6,8 @@
 
         IAlbumRepository Album { get; }
 
+        IArtistRepository Artist { get; }
+
         void Save();
     }
 }
