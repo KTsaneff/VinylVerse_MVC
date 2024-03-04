@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using VinylVerseWeb.Models;
+using VynilVerse.Models;
 
 namespace VinylVerseWeb.Controllers
 {

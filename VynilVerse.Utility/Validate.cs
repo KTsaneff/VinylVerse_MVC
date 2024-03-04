@@ -1,4 +1,4 @@
-﻿namespace VinylVerseWeb.Data.Validation
+﻿namespace VynilVerse.Utility
 {
     public static class Validate
     {

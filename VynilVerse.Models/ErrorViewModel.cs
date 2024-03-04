@@ -1,4 +1,4 @@
-namespace VinylVerseWeb.Models
+namespace VynilVerse.Models
 {
     public class ErrorViewModel
     {

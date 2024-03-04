@@ -3,11 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using VinylVerseWeb.Data;
+using VynilVerse.DataAccess.Data;
 
 #nullable disable
 
-namespace VinylVerseWeb.Migrations
+namespace VynilVerse.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -21,7 +21,7 @@ namespace VinylVerseWeb.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("VinylVerseWeb.Models.Genre", b =>
+            modelBuilder.Entity("VynilVerse.Models.Genre", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -34,7 +34,8 @@ namespace VinylVerseWeb.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.HasKey("Id");
 
@@ -43,56 +44,32 @@ namespace VinylVerseWeb.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
-                            DisplayOrder = 1,
-                            Name = "Country"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            DisplayOrder = 2,
-                            Name = "Electronic"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            DisplayOrder = 3,
-                            Name = "Funk"
-                        },
-                        new
-                        {
                             Id = 4,
-                            DisplayOrder = 4,
+                            DisplayOrder = 1,
                             Name = "Jazz"
                         },
                         new
                         {
                             Id = 5,
-                            DisplayOrder = 5,
+                            DisplayOrder = 2,
                             Name = "Latin"
                         },
                         new
                         {
                             Id = 6,
-                            DisplayOrder = 6,
+                            DisplayOrder = 3,
                             Name = "Pop"
                         },
                         new
                         {
-                            Id = 7,
-                            DisplayOrder = 7,
-                            Name = "Punk"
-                        },
-                        new
-                        {
                             Id = 8,
-                            DisplayOrder = 8,
+                            DisplayOrder = 4,
                             Name = "Reggae"
                         },
                         new
                         {
                             Id = 9,
-                            DisplayOrder = 9,
+                            DisplayOrder = 5,
                             Name = "Rock"
                         });
                 });

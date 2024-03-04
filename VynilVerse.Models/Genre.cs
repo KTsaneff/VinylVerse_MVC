@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using VinylVerseWeb.Data.Validation;
+using VynilVerse.Utility;
 
-namespace VinylVerseWeb.Models
+namespace VynilVerse.Models
 {
     public class Genre
     {
@@ -14,7 +14,7 @@ namespace VinylVerseWeb.Models
         [DisplayName("Genre Name")]
         public string Name { get; set; } = null!;
 
-        [Range(Validate.GenreDisplayOrderMinValue, Validate.GenreDisplayOrderMaxValue,ErrorMessage = Validate.GenreDisplayOrderErrorMessage)]
+        [Range(Validate.GenreDisplayOrderMinValue, Validate.GenreDisplayOrderMaxValue, ErrorMessage = Validate.GenreDisplayOrderErrorMessage)]
         [DisplayName("Display Order")]
         public int DisplayOrder { get; set; }
     }

@@ -5,11 +5,11 @@ VisualStudioVersion = 17.9.34607.119
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VinylVerseWeb", "VinylVerseWeb\VinylVerseWeb.csproj", "{70C24350-6600-425D-90BD-A5A3B5023E5F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VynilVerse.Data", "VynilVerse.Data\VynilVerse.Data.csproj", "{5A137061-3452-4056-9C50-B152F4D886A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VynilVerse.DataAccess", "VynilVerse.Data\VynilVerse.DataAccess.csproj", "{5A137061-3452-4056-9C50-B152F4D886A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VynilVerse.Models", "VynilVerse.Models\VynilVerse.Models.csproj", "{7A8FA704-32CB-4A5B-865A-333832969D86}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VynilVerse.Models", "VynilVerse.Models\VynilVerse.Models.csproj", "{7A8FA704-32CB-4A5B-865A-333832969D86}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VynilVerse.Utility", "VynilVerse.Utility\VynilVerse.Utility.csproj", "{52E59593-9CB5-4AA2-A8B1-2B01AD1761F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VynilVerse.Utility", "VynilVerse.Utility\VynilVerse.Utility.csproj", "{52E59593-9CB5-4AA2-A8B1-2B01AD1761F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

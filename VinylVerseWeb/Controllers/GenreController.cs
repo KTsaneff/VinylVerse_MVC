@@ -1,21 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using VinylVerseWeb.Data;
-using VinylVerseWeb.Models;
+using VynilVerse.DataAccess.Data;
+using VynilVerse.DataAccess.Repository;
+using VynilVerse.Models;
 
 namespace VinylVerseWeb.Controllers
 {
     public class GenreController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IGenreRepository _repo;
 
-        public GenreController(ApplicationDbContext context)
+        public GenreController(IGenreRepository repo)
         {
-            _context = context;
+            _repo = repo;
         }
 
         public IActionResult Index()
         {
-            List<Genre> genres = _context.Genres.ToList();
+            List<Genre> genres = _repo.GetAll().ToList();
             return View(genres);
         }
 
@@ -27,15 +28,15 @@ namespace VinylVerseWeb.Controllers
         [HttpPost]
         public IActionResult Create(Genre genre)
         {
-            if (genre.Name != null && !genre.Name.All(char.IsLetter))
+            if (genre.Name != null && genre.Name.Any(char.IsDigit) && genre.Name.Any(char.IsPunctuation))
             {
                 ModelState.AddModelError("Name", "Genre cannot contain special symbols or digits.");
             }
 
             if (ModelState.IsValid)
             {
-                _context.Genres.Add(genre);
-                _context.SaveChanges();
+                _repo.Add(genre);
+                _repo.Save();
 
                 TempData["success"] = "Genre added successfully";
 
@@ -51,7 +52,7 @@ namespace VinylVerseWeb.Controllers
                 return NotFound();
             }
 
-            Genre? genre = _context.Genres.Find(id);
+            Genre? genre = _repo.Get(x => x.Id == id);
 
             if(genre == null)
             {
@@ -66,8 +67,8 @@ namespace VinylVerseWeb.Controllers
         {           
             if (ModelState.IsValid)
             {
-                _context.Genres.Update(genre);
-                _context.SaveChanges();
+                _repo.Update(genre);
+                _repo.Save();
 
                 TempData["success"] = "Genre updated successfully";
 
@@ -83,7 +84,7 @@ namespace VinylVerseWeb.Controllers
                 return NotFound();
             }
 
-            Genre? genre = _context.Genres.Find(id);
+            Genre? genre = _repo.Get(x => x.Id == id);
 
             if (genre == null)
             {
@@ -96,13 +97,13 @@ namespace VinylVerseWeb.Controllers
         [HttpPost, ActionName("Delete")]
         public IActionResult DeletePost(int? id)
         {
-            Genre genreToDelete = _context.Genres.Find(id);
+            Genre genreToDelete = _repo.Get(x => x.Id == id);
             if(genreToDelete == null)
             {
                 return NotFound();
             }
-            _context.Genres.Remove(genreToDelete);
-            _context.SaveChanges();
+            _repo.Remove(genreToDelete);
+            _repo.Save();
 
             TempData["success"] = "Genre deleted successfully";
 
