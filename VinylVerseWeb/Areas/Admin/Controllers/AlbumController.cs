@@ -4,6 +4,7 @@ using VynilVerse.Models;
 
 namespace VinylVerseWeb.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class AlbumController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
