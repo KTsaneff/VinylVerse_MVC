@@ -35,9 +35,12 @@
                 @foreach (var artist in Model.OrderBy(u => u.Name))
                 {
                     <tr>
-                        <td>@artist.Name</td>
-                        <td>@artist.Country</td>
-                        <td>
+                        <td class="align-middle">@artist.Name</td>
+                        <td class="align-middle">@artist.Country</td>
+                        <td class="align-middle">
+                            <img src="@artist.ArtistImageUrl" alt="Artist Image" style="max-width: 100px; max-height: 100px;" />
+                        </td>
+                        <td class="align-middle">
                             <div class="w-75 btn-group" role="group">
                                 <a asp-controller="Artist" asp-action="Edit" asp-route-id="@artist.Id" class="btn btn-primary mx-2">
                                     <i class="bi bi-pencil-square"></i> Edit

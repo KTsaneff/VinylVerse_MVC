@@ -18,7 +18,6 @@
         public const string AlbumMaxPrice = "1000000";
         public const int AlbumMinQuantity = 0;
         public const int AlbumMaxQuantity = 1000;
-        public const string AlbumImageUrlRegex = @"^(http[s]?://)?([\\w-]+\\.)+[\\w-]+(/[\\w- ./?%&=]*)?$";
         public const double AlbumRatingMinValue = 0;
         public const double AlbumRatingMaxValue = 10;
 
@@ -26,5 +25,8 @@
         //Artist Validation Constants
         public const int ArtistNameMaxLength = 50;
         public const int CountryNameMaxLength = 50;
+
+        //Regex
+        public const string ImageUrlRegex = @"^(https?://)?([\w-]+\.)+[\w-]+(/[\w-./?%&=]*)?$";
     }
 }

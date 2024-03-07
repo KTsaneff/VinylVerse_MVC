@@ -33,9 +33,6 @@ namespace VynilVerse.DataAccess.Migrations
                     b.Property<int>("ArtistId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ArtistId2")
-                        .HasColumnType("int");
-
                     b.Property<string>("CoverImageUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -76,6 +73,36 @@ namespace VynilVerse.DataAccess.Migrations
                     b.HasIndex("GenreId");
 
                     b.ToTable("Albums");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ArtistId = 1,
+                            CoverImageUrl = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.thisisdig.com%2Ffeature%2Fcalifornication-red-hot-chili-peppers-album%2F&psig=AOvVaw2_uxpUxmYM3PrzgBJ0stid&ust=1709904223869000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCPjrvOCf4oQDFQAAAAAdAAAAABAI",
+                            Descriprion = "Californication is the seventh studio album by American rock band Red Hot Chili Peppers.",
+                            GenreId = 1,
+                            Price = 55.99m,
+                            Quantity = 150,
+                            Rating = 8.1999999999999993,
+                            Title = "Californication",
+                            TrackList = "Around the World;Parallel Universe;Scar Tissue;Otherside;Get on Top;Californication;Easily;Porcelain;Emit Remmus;I Like Dirt;This Velvet Glove;Savior;Purple Stain;Right on Time;Road Trippin'",
+                            YearOfRelease = 1999
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ArtistId = 2,
+                            CoverImageUrl = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.amazon.com%2FIts-Time-Michael-Buble%2Fdp%2FB00074CC1Y&psig=AOvVaw2D9Z8n5Dzrz52WpaYfQBhE&ust=1709905597761000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCOjxw--k4oQDFQAAAAAdAAAAABAE",
+                            Descriprion = "It's Time is the fourth studio album by Canadian singer Michael Bublé. It was released on February 8, 2005, by 143 Records and Reprise Records. With arrangements by David Foster, the album contains cover versions of songs from traditional contemporary pop: George Gershwin, Cole Porter, Stevie Wonder, and The Beatles, as well as the original song \"Home\", which was co-written by Bublé.",
+                            GenreId = 3,
+                            Price = 24.99m,
+                            Quantity = 100,
+                            Rating = 7.5,
+                            Title = "It's Time",
+                            TrackList = "Feeling Good;A Foggy Day (In London Town);You Don't Know Me;Quando, Quando, Quando;Home;Can't Buy Me Love;The More I See You;Save The Last Dance For Me;Try A Little Tenderness;How Sweet It Is;A Song For You;I've Got You Under My Skin;You And I;Dream A Little Dream (Special Edition Only);Mack The Knife (Special Edition Only)",
+                            YearOfRelease = 2005
+                        });
                 });
 
             modelBuilder.Entity("VynilVerse.Models.Artist", b =>
@@ -85,6 +112,10 @@ namespace VynilVerse.DataAccess.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("ArtistImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Country")
                         .HasMaxLength(50)
@@ -98,6 +129,22 @@ namespace VynilVerse.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Artists");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ArtistImageUrl = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.futuro.cl%2F2022%2F06%2Fred-hot-chili-peppers-y-californication-en-su-mejor-forma%2F&psig=AOvVaw2_uxpUxmYM3PrzgBJ0stid&ust=1709904223869000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCPjrvOCf4oQDFQAAAAAdAAAAABA9",
+                            Country = "USA",
+                            Name = "Red Hot Chili Peppers"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ArtistImageUrl = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.futuro.cl%2F2022%2F06%2Fred-hot-chili-peppers-y-californication-en-su-mejor-forma%2F&psig=AOvVaw2_uxpUxmYM3PrzgBJ0stid&ust=1709904223869000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCPjrvOCf4oQDFQAAAAAdAAAAABA9",
+                            Country = "Canada",
+                            Name = "Michael Buble"
+                        });
                 });
 
             modelBuilder.Entity("VynilVerse.Models.Genre", b =>
@@ -123,31 +170,31 @@ namespace VynilVerse.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 4,
+                            Id = 1,
                             DisplayOrder = 1,
                             Name = "Jazz"
                         },
                         new
                         {
-                            Id = 5,
+                            Id = 2,
                             DisplayOrder = 2,
                             Name = "Latin"
                         },
                         new
                         {
-                            Id = 6,
+                            Id = 3,
                             DisplayOrder = 3,
                             Name = "Pop"
                         },
                         new
                         {
-                            Id = 8,
+                            Id = 4,
                             DisplayOrder = 4,
                             Name = "Reggae"
                         },
                         new
                         {
-                            Id = 9,
+                            Id = 5,
                             DisplayOrder = 5,
                             Name = "Rock"
                         });
@@ -158,7 +205,7 @@ namespace VynilVerse.DataAccess.Migrations
                     b.HasOne("VynilVerse.Models.Artist", "Artist")
                         .WithMany("Albums")
                         .HasForeignKey("ArtistId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("VynilVerse.Models.Genre", "Genre")

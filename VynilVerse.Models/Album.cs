@@ -13,18 +13,16 @@ namespace VynilVerse.Models
         [MaxLength(Validate.AlbumTitleMaxLength)]
         public string Title { get; set; } = null!;
 
-        [ForeignKey(nameof(Artist))]
         [Required]
         public int ArtistId { get; set; }
 
-        [InverseProperty("Albums")]
+        [ForeignKey(nameof(ArtistId))]
         public Artist Artist { get; set; } = null!;
 
-        [ForeignKey(nameof(Genre))]
         [Required]
         public int GenreId { get; set; }
 
-        [InverseProperty("Albums")]
+        [ForeignKey(nameof(GenreId))]
         public Genre Genre { get; set; } = null!;
 
         [Range(Validate.ReleaseYearMinValue, Validate.ReleaseYearMaxValue)]
@@ -42,7 +40,7 @@ namespace VynilVerse.Models
         public int Quantity { get; set; }
 
         [Required]
-        [RegularExpression(Validate.AlbumImageUrlRegex)]
+        [RegularExpression(Validate.ImageUrlRegex)]
         public string CoverImageUrl { get; set; } = null!;
 
         [Range(Validate.AlbumRatingMinValue, Validate.AlbumRatingMaxValue)]
