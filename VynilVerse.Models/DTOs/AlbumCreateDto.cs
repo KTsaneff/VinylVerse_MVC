@@ -1,29 +1,23 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using VynilVerse.Utility;
 
-namespace VynilVerse.Models
+namespace VynilVerse.Models.DTOs
 {
-    public class Album
+    public class AlbumCreateDto
     {
-        [Key]
-        public int Id { get; set; }
-
         [Required]
         [MaxLength(Validate.AlbumTitleMaxLength)]
-        public string Title { get; set; } = null!;
+        public  string Title { get; set; } = null!;
 
-        [Required]
+        [Range(1, int.MaxValue)]
         public int ArtistId { get; set; }
 
-        [ForeignKey(nameof(ArtistId))]
-        public Artist Artist { get; set; } = null!;
+        public virtual IEnumerable<ArtistSelectDto> Artists { get; set; } = null!;
 
-        [Required]
+        [Range(1, int.MaxValue)]
         public int GenreId { get; set; }
 
-        [ForeignKey(nameof(GenreId))]
-        public Genre Genre { get; set; } = null!;
+        public virtual IEnumerable<GenreSelectDto> Genres { get; set; } = null!;
 
         [Range(Validate.ReleaseYearMinValue, Validate.ReleaseYearMaxValue)]
         public int YearOfRelease { get; set; }
@@ -46,6 +40,7 @@ namespace VynilVerse.Models
         [Range(Validate.AlbumRatingMinValue, Validate.AlbumRatingMaxValue)]
         public double? Rating { get; set; }
 
-        public List<string> TrackList { get; set; } = new List<string>();
+        public List<string> Tracks { get; set; } = new List<string>();
+
     }
 }

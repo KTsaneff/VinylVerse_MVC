@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using VynilVerse.DataAccess.Repository.Contracts;
 using VynilVerse.Models;
+using VynilVerse.Models.DTOs;
 
 namespace VinylVerseWeb.Areas.Admin.Controllers
 {
@@ -18,6 +19,24 @@ namespace VinylVerseWeb.Areas.Admin.Controllers
         {
             List<Album> albums = _unitOfWork.Album.GetAll().ToList();
             return View(albums);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Create()
+        {
+            AlbumCreateDto model = await _unitOfWork.Album.GetAlbumCreateDtoAsync();
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(AlbumCreateDto model)
+        {
+            if(!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            throw new NotImplementedException();
         }
     }
 }

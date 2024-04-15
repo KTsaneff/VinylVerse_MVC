@@ -1,0 +1,88 @@
+﻿@model AlbumCreateDto
+
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient m-lg-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Add Album</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form method="post" class="row">
+            <div class="border p-3">
+                @* <div asp-validation-summary="ModelOnly"></div> *@
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Title" class="form-control border-0 shadow" />
+                    <label asp-for="Title" class="ms-2"></label>
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <select asp-for="@Model.ArtistId" aria-required="true" class="form-control border-0 shadow" asp-items="@(new SelectList(Model.Artists, "Id", "Name"))">
+                        <option>Please select an artist</option>
+                    </select>
+                    <label asp-for="ArtistId" class="ms-2"></label>
+                    <span asp-validation-for="ArtistId" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <select asp-for="@Model.GenreId" aria-required="true" class="form-control border-0 shadow" asp-items="@(new SelectList(Model.Genres, "Id", "Name"))">
+                        <option>Please select a genre</option>
+                    </select>
+                    <label asp-for="GenreId" class="ms-2"></label>
+                    <span asp-validation-for="GenreId" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="YearOfRelease" class="form-control border-0 shadow" />
+                    <label asp-for="YearOfRelease" class="ms-2"></label>
+                    <span asp-validation-for="YearOfRelease" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Description" class="form-control border-0 shadow" />
+                    <label asp-for="Description" class="ms-2"></label>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Price" class="form-control border-0 shadow" />
+                    <label asp-for="Price" class="ms-2"></label>
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Quantity" class="form-control border-0 shadow" />
+                    <label asp-for="Quantity" class="ms-2"></label>
+                    <span asp-validation-for="Quantity" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="CoverImageUrl" class="form-control border-0 shadow" />
+                    <label asp-for="CoverImageUrl" class="ms-2"></label>
+                    <span asp-validation-for="CoverImageUrl" class="text-danger"></span>
+                </div>
+                <div class="py-2 col-12">
+                    <label>Tracks:</label>
+                    <div id="trackFields">
+                        @foreach (var track in Model.Tracks)
+                        {
+                            <input type="text" name="Tracks" class="form-control border-0 shadow" value="@track" />
+                        }
+                    </div>
+                    <button type="button" id="addTrack" class="btn btn-sm btn-outline-primary mt-2">Add Track</button>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-6 col-md-3">
+                        <button type="submit" class="btn btn-primary form-control">Submit</button>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a asp-controller="Artist" asp-action="Index" class="btn btn-outline-primary border form-control">Back To List</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

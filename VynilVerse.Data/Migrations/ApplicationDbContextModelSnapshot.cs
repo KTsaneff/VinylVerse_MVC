@@ -37,7 +37,7 @@ namespace VynilVerse.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Descriprion")
+                    b.Property<string>("Description")
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
 
@@ -80,7 +80,7 @@ namespace VynilVerse.DataAccess.Migrations
                             Id = 1,
                             ArtistId = 1,
                             CoverImageUrl = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.thisisdig.com%2Ffeature%2Fcalifornication-red-hot-chili-peppers-album%2F&psig=AOvVaw2_uxpUxmYM3PrzgBJ0stid&ust=1709904223869000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCPjrvOCf4oQDFQAAAAAdAAAAABAI",
-                            Descriprion = "Californication is the seventh studio album by American rock band Red Hot Chili Peppers.",
+                            Description = "Californication is the seventh studio album by American rock band Red Hot Chili Peppers.",
                             GenreId = 1,
                             Price = 55.99m,
                             Quantity = 150,
@@ -94,7 +94,7 @@ namespace VynilVerse.DataAccess.Migrations
                             Id = 2,
                             ArtistId = 2,
                             CoverImageUrl = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.amazon.com%2FIts-Time-Michael-Buble%2Fdp%2FB00074CC1Y&psig=AOvVaw2D9Z8n5Dzrz52WpaYfQBhE&ust=1709905597761000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCOjxw--k4oQDFQAAAAAdAAAAABAE",
-                            Descriprion = "It's Time is the fourth studio album by Canadian singer Michael Bublé. It was released on February 8, 2005, by 143 Records and Reprise Records. With arrangements by David Foster, the album contains cover versions of songs from traditional contemporary pop: George Gershwin, Cole Porter, Stevie Wonder, and The Beatles, as well as the original song \"Home\", which was co-written by Bublé.",
+                            Description = "It's Time is the fourth studio album by Canadian singer Michael Bublé. It was released on February 8, 2005, by 143 Records and Reprise Records. With arrangements by David Foster, the album contains cover versions of songs from traditional contemporary pop: George Gershwin, Cole Porter, Stevie Wonder, and The Beatles, as well as the original song \"Home\", which was co-written by Bublé.",
                             GenreId = 3,
                             Price = 24.99m,
                             Quantity = 100,
@@ -134,14 +134,14 @@ namespace VynilVerse.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            ArtistImageUrl = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.futuro.cl%2F2022%2F06%2Fred-hot-chili-peppers-y-californication-en-su-mejor-forma%2F&psig=AOvVaw2_uxpUxmYM3PrzgBJ0stid&ust=1709904223869000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCPjrvOCf4oQDFQAAAAAdAAAAABA9",
+                            ArtistImageUrl = "https://ca-times.brightspotcdn.com/dims4/default/cb16b10/2147483647/strip/true/crop/4935x3290+0+0/resize/2400x1600!/quality/75/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2F5b%2F33%2Ff367fb35474d864941e977e5f48e%2F927846-ca-0321-red-hot-chili-peppers-sunday-calendar-cover-mrt-02.jpg",
                             Country = "USA",
                             Name = "Red Hot Chili Peppers"
                         },
                         new
                         {
                             Id = 2,
-                            ArtistImageUrl = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.futuro.cl%2F2022%2F06%2Fred-hot-chili-peppers-y-californication-en-su-mejor-forma%2F&psig=AOvVaw2_uxpUxmYM3PrzgBJ0stid&ust=1709904223869000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCPjrvOCf4oQDFQAAAAAdAAAAABA9",
+                            ArtistImageUrl = "https://ew.com/thmb/S1YcQL0-TGSdkaTuVPXPEhLnB3Y=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/michael-buble-122223-923e3a72df7a4d998aeb51c746bf2b4a.jpg",
                             Country = "Canada",
                             Name = "Michael Buble"
                         });
