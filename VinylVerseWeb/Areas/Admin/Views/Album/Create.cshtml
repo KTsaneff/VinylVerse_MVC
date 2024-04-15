@@ -9,7 +9,7 @@
         </div>
     </div>
     <div class="card-body p-4">
-        <form method="post" class="row">
+        <form method="post" class="row" id="albumForm" onsubmit="populateTracksInput()">
             <div class="border p-3">
                 @* <div asp-validation-summary="ModelOnly"></div> *@
                 <div class="form-floating py-2 col-12">
@@ -57,14 +57,18 @@
                     <span asp-validation-for="CoverImageUrl" class="text-danger"></span>
                 </div>
                 <div class="py-2 col-12">
-                    <label>Tracks:</label>
-                    <div id="trackFields">
-                        @foreach (var track in Model.Tracks)
-                        {
-                            <input type="text" name="Tracks" class="form-control border-0 shadow" value="@track" />
-                        }
-                    </div>
-                    <button type="button" id="addTrack" class="btn btn-sm btn-outline-primary mt-2">Add Track</button>
+                    <button type="button" id="addTrackButton" class="btn btn-sm btn-outline-primary mt-2" data-bs-toggle="modal" data-bs-target="#trackModal">Add Track</button>
+                    <table id="trackList" class="table">
+                        <thead>
+                            <tr>
+                                <th>Track Title</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                        </tbody>
+                    </table>
                 </div>
                 <div class="row mt-2">
                     <div class="col-6 col-md-3">
@@ -79,6 +83,23 @@
     </div>
 </div>
 
+<div class="modal fade" id="trackModal" tabindex="-1" aria-labelledby="trackModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="trackModalLabel">Add Track</h5>
+            </div>
+            <div class="modal-body">
+                <input type="text" id="newTrackTitle" class="form-control" placeholder="Enter track title" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="addTrack()">Add Track</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
 @section Scripts {
@@ -86,3 +107,5 @@
         <partial name="_ValidationScriptsPartial" />
     }
 }
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/album-scripts.js"></script>
