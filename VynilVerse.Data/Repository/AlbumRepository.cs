@@ -24,11 +24,31 @@ namespace VynilVerse.DataAccess.Repository
                     ArtistName = a.Artist.Name,
                     CoverImageUrl = a.CoverImageUrl
                 })
+                .OrderBy(a => a.Title)
                 .ToListAsync();
             return albums;
         }
 
-        public async Task<AlbumCreateDto> GetAlbumCreateDtoAsync()
+        public async Task EditAlbumAsync(AlbumAdminEditDto album)
+        {
+            Album albumToEdit = await _context.Albums.FindAsync(album.Id);
+
+            albumToEdit.Title = album.Title;
+            albumToEdit.ArtistId = album.ArtistId;
+            albumToEdit.GenreId = album.GenreId;
+            albumToEdit.YearOfRelease = album.YearOfRelease;
+            albumToEdit.CoverImageUrl = album.CoverImageUrl;
+            albumToEdit.Description = album.Description;
+            albumToEdit.Price = album.Price;
+            albumToEdit.Quantity = album.Quantity;
+            albumToEdit.Rating = album.Rating;
+            albumToEdit.TrackList = album.Tracks;
+
+            _context.Albums.Update(albumToEdit);
+            _context.SaveChanges();
+        }
+
+        public async Task<AlbumAdminCreateDto> GetAlbumCreateDtoAsync()
         {
             IEnumerable<ArtistSelectDto> artists = await _context.Artists
                 .Select(a => new ArtistSelectDto
@@ -46,7 +66,7 @@ namespace VynilVerse.DataAccess.Repository
                 })
                 .ToListAsync();
 
-            AlbumCreateDto albumCreateDto = new AlbumCreateDto
+            AlbumAdminCreateDto albumCreateDto = new AlbumAdminCreateDto
             {
                 Artists = artists,
                 Genres = genres
@@ -54,9 +74,55 @@ namespace VynilVerse.DataAccess.Repository
             return albumCreateDto;
         }
 
-        public void Update(Album album)
+        public async Task<AlbumAdminEditDto> GetAlbumEditDtoAsync(int id)
+        {
+            Album album = await _context.Albums.FindAsync(id);
+
+            if (album == null)
+            {
+                return null;
+            }
+
+            IEnumerable<ArtistSelectDto> artists = await _context.Artists
+                .Select(a => new ArtistSelectDto
+                {
+                    Id = a.Id,
+                    Name = a.Name
+                })
+                .ToListAsync();
+
+            IEnumerable<GenreSelectDto> genres = await _context.Genres
+                .Select(g => new GenreSelectDto
+                {
+                    Id = g.Id,
+                    Name = g.Name
+                })
+                .ToListAsync();
+
+            AlbumAdminEditDto albumEditDto = new AlbumAdminEditDto
+            {
+                Id = album.Id,
+                Title = album.Title,
+                ArtistId = album.ArtistId,
+                GenreId = album.GenreId,
+                YearOfRelease = album.YearOfRelease,
+                CoverImageUrl = album.CoverImageUrl,
+                Description = album.Description,
+                Price = album.Price,
+                Quantity = album.Quantity,
+                Rating = album.Rating,
+                Tracks = album.TrackList,
+                Artists = artists,
+                Genres = genres
+            };
+
+            return albumEditDto;
+        }
+
+        public async Task UpdateAsync(Album album)
         {
             _context.Albums.Update(album);
+            await _context.SaveChangesAsync();
         }
     }
 }

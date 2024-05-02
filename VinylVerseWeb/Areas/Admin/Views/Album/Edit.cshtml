@@ -1,16 +1,18 @@
-﻿@model AlbumAdminCreateDto
+﻿@model AlbumAdminEditDto
+
 
 <div class="card shadow border-0 mt-4">
     <div class="card-header bg-secondary bg-gradient m-lg-0 py-3">
         <div class="row">
             <div class="col-12 text-center">
-                <h2 class="text-white py-2">Add Album</h2>
+                <h2 class="text-white py-2">Edit Album</h2>
             </div>
         </div>
     </div>
     <div class="card-body p-4">
-        <form method="post" class="row" id="albumForm" onsubmit="populateTracksInput()">
-            <div class="border p-3">
+        <form method="post">
+            <input asp-for="Id" hidden />
+            <div class="border p-3 mt-4">
                 <div class="form-floating py-2 col-12">
                     <input asp-for="Title" class="form-control border-0 shadow" />
                     <label asp-for="Title" class="ms-2"></label>
@@ -20,14 +22,14 @@
                     <select asp-for="@Model.ArtistId" aria-required="true" class="form-control border-0 shadow" asp-items="@(new SelectList(Model.Artists, "Id", "Name"))">
                         <option>Please select an artist</option>
                     </select>
-                    <label asp-for="ArtistId" class="ms-2"></label>
+                    <label asp-for="ArtistId" class="ms-2">Artist</label>
                     <span asp-validation-for="ArtistId" class="text-danger"></span>
                 </div>
                 <div class="form-floating py-2 col-12">
                     <select asp-for="@Model.GenreId" aria-required="true" class="form-control border-0 shadow" asp-items="@(new SelectList(Model.Genres, "Id", "Name"))">
                         <option>Please select a genre</option>
                     </select>
-                    <label asp-for="GenreId" class="ms-2"></label>
+                    <label asp-for="GenreId" class="ms-2">Genre</label>
                     <span asp-validation-for="GenreId" class="text-danger"></span>
                 </div>
                 <div class="form-floating py-2 col-12">
@@ -82,28 +84,10 @@
     </div>
 </div>
 
-<!-- Modal -->
-<div id="trackModal" class="modal" tabindex="-1" role="dialog" aria-labelledby="trackModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="trackModalLabel">Add Track</h5>
-            </div>
-            <div class="modal-body">
-                <input type="text" id="newTrackTitle" class="form-control" placeholder="Enter track title" />
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" id="closeModalButton">Close</button>
-                <button type="button" id="addTrackButtonModal" class="btn btn-primary">Add Track</button>
-            </div>            
-        </div>
-    </div>
-</div>
 
 
 @section Scripts {
     @{
         <partial name="_ValidationScriptsPartial" />
     }
-    <script src="~/js/album.js"></script>
 }

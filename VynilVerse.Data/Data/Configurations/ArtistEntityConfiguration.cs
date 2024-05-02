@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using VynilVerse.Models;
 
 namespace VynilVerse.DataAccess.Data.Configurations
 {
-    public class ArtistEntityConfiguration
+    public class ArtistEntityConfiguration : IEntityTypeConfiguration<Artist>
     {
         public void Configure(EntityTypeBuilder<Artist> builder)
         {
@@ -89,7 +90,7 @@ namespace VynilVerse.DataAccess.Data.Configurations
                     Id = 11,
                     Name = "David Bowie",
                     Country = "USA",
-                    ArtistImageUrl = "https://static.wikia.nocookie.net/disney/images/4/44/David_Bowie.jpg/revision/latest?cb=20231217194435"
+                    ArtistImageUrl = "https://media.vanityfair.com/photos/56935aff030e898e45417924/16:9/w_1280,c_limit/david-bowie-dies-cancer-69.jpg"
                 },
                 new Artist
                 {

@@ -27,12 +27,15 @@
                         Country of Origin
                     </th>
                     <th>
-
+                        Image
+                    </th>
+                    <th>
+                        Actions
                     </th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var artist in Model.OrderBy(u => u.Name))
+                @foreach (var artist in Model)
                 {
                     <tr>
                         <td class="align-middle">@artist.Name</td>
@@ -56,7 +59,5 @@
         </table>
     </div>
 </div>
-
 <div class="container">
-   
 </div>

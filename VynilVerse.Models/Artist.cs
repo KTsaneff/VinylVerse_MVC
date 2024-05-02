@@ -21,7 +21,6 @@ namespace VynilVerse.Models
         public string? Country { get; set; }
 
         [Required]
-        [RegularExpression(Validate.ImageUrlRegex)]
         public string ArtistImageUrl { get; set; } = null!;
 
         public virtual ICollection<Album> Albums { get; set; }

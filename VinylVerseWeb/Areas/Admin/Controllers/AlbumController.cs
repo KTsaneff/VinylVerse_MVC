@@ -24,12 +24,12 @@ namespace VinylVerseWeb.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            AlbumCreateDto model = await _unitOfWork.Album.GetAlbumCreateDtoAsync();
+            AlbumAdminCreateDto model = await _unitOfWork.Album.GetAlbumCreateDtoAsync();
             return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(AlbumCreateDto model)
+        public async Task<IActionResult> Create(AlbumAdminCreateDto model)
         {
             if(!ModelState.IsValid)
             {
@@ -37,6 +37,39 @@ namespace VinylVerseWeb.Areas.Admin.Controllers
             }
 
             throw new NotImplementedException();
+        }
+
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+
+            int identifier = id.GetValueOrDefault();
+
+            AlbumAdminEditDto album = await _unitOfWork.Album.GetAlbumEditDtoAsync(identifier);
+
+            if (album == null)
+            {
+                return NotFound();
+            }
+
+            return View(album);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(AlbumAdminEditDto album)
+        {
+            if (ModelState.IsValid)
+            {
+                await _unitOfWork.Album.EditAlbumAsync(album);
+
+                TempData["success"] = "Album updated successfully";
+
+                return RedirectToAction("Index");
+            }
+            return View(album);
         }
     }
 }

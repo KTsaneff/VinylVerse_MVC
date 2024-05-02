@@ -3,7 +3,7 @@ using VynilVerse.Utility;
 
 namespace VynilVerse.Models.DTOs
 {
-    public class AlbumCreateDto
+    public class AlbumAdminCreateDto
     {
         [Required]
         [MaxLength(Validate.AlbumTitleMaxLength)]
@@ -34,7 +34,6 @@ namespace VynilVerse.Models.DTOs
         public int Quantity { get; set; }
 
         [Required]
-        [RegularExpression(Validate.ImageUrlRegex)]
         public string CoverImageUrl { get; set; } = null!;
 
         [Range(Validate.AlbumRatingMinValue, Validate.AlbumRatingMaxValue)]

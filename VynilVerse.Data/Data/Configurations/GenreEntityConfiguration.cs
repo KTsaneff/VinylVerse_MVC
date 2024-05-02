@@ -100,6 +100,16 @@ namespace VynilVerse.DataAccess.Data.Configurations
                     Id = 17,
                     Name = "Techno"
                 },
+                new Genre
+                {
+                    Id = 18,
+                    Name = "House"
+                },
+                new Genre
+                {
+                    Id = 19,
+                    Name = "Rock&Roll"
+                }
             };
 
             return genres;

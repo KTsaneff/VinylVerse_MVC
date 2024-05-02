@@ -17,7 +17,7 @@ namespace VinylVerseWeb.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            List<Genre> genres = _unitOfWork.Genre.GetAll().ToList();
+            List<Genre> genres = _unitOfWork.Genre.GetAll().OrderBy(g => g.Name).ToList();
             return View(genres);
         }
 
@@ -46,14 +46,14 @@ namespace VinylVerseWeb.Areas.Admin.Controllers
             return View();
         }
 
-        public IActionResult Edit(int? id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || id == 0)
             {
                 return NotFound();
             }
 
-            Genre? genre = _unitOfWork.Genre.Get(x => x.Id == id);
+            Genre? genre = await _unitOfWork.Genre.GetAsync(x => x.Id == id);
 
             if (genre == null)
             {
@@ -78,14 +78,14 @@ namespace VinylVerseWeb.Areas.Admin.Controllers
             return View();
         }
 
-        public IActionResult Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || id == 0)
             {
                 return NotFound();
             }
 
-            Genre? genre = _unitOfWork.Genre.Get(x => x.Id == id);
+            Genre? genre = await _unitOfWork.Genre.GetAsync(x => x.Id == id);
 
             if (genre == null)
             {
@@ -96,9 +96,9 @@ namespace VinylVerseWeb.Areas.Admin.Controllers
         }
 
         [HttpPost, ActionName("Delete")]
-        public IActionResult DeletePost(int? id)
+        public async Task<IActionResult> DeletePost(int? id)
         {
-            Genre genreToDelete = _unitOfWork.Genre.Get(x => x.Id == id);
+            Genre genreToDelete = await _unitOfWork.Genre.GetAsync(x => x.Id == id);
             if (genreToDelete == null)
             {
                 return NotFound();
