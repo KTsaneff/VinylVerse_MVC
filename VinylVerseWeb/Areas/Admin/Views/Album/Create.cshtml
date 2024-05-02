@@ -1,6 +1,6 @@
 ﻿@model AlbumAdminCreateDto
 
-<div class="card shadow border-0 mt-4">
+<div class="card shadow border-0 my-4">
     <div class="card-header bg-secondary bg-gradient m-lg-0 py-3">
         <div class="row">
             <div class="col-12 text-center">
@@ -20,14 +20,14 @@
                     <select asp-for="@Model.ArtistId" aria-required="true" class="form-control border-0 shadow" asp-items="@(new SelectList(Model.Artists, "Id", "Name"))">
                         <option>Please select an artist</option>
                     </select>
-                    <label asp-for="ArtistId" class="ms-2"></label>
+                    <label asp-for="ArtistId" class="ms-2">Artist</label>
                     <span asp-validation-for="ArtistId" class="text-danger"></span>
                 </div>
                 <div class="form-floating py-2 col-12">
                     <select asp-for="@Model.GenreId" aria-required="true" class="form-control border-0 shadow" asp-items="@(new SelectList(Model.Genres, "Id", "Name"))">
                         <option>Please select a genre</option>
                     </select>
-                    <label asp-for="GenreId" class="ms-2"></label>
+                    <label asp-for="GenreId" class="ms-2">Genre</label>
                     <span asp-validation-for="GenreId" class="text-danger"></span>
                 </div>
                 <div class="form-floating py-2 col-12">
@@ -36,7 +36,7 @@
                     <span asp-validation-for="YearOfRelease" class="text-danger"></span>
                 </div>
                 <div class="form-floating py-2 col-12">
-                    <input asp-for="Description" class="form-control border-0 shadow" />
+                    <textarea asp-for="Description" class="form-control border-0 shadow"></textarea>
                     <label asp-for="Description" class="ms-2"></label>
                     <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
@@ -49,6 +49,11 @@
                     <input asp-for="Quantity" class="form-control border-0 shadow" />
                     <label asp-for="Quantity" class="ms-2"></label>
                     <span asp-validation-for="Quantity" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Rating" class="form-control border-0 shadow" />
+                    <label asp-for="Rating" class="ms-2"></label>
+                    <span asp-validation-for="Rating" class="text-danger"></span>
                 </div>
                 <div class="form-floating py-2 col-12">
                     <input asp-for="CoverImageUrl" class="form-control border-0 shadow" />
@@ -74,7 +79,7 @@
                         <button type="submit" class="btn btn-primary form-control">Submit</button>
                     </div>
                     <div class="col-6 col-md-3">
-                        <a asp-controller="Artist" asp-action="Index" class="btn btn-outline-primary border form-control">Back To List</a>
+                        <a asp-controller="Album" asp-action="Index" class="btn btn-outline-primary border form-control">Back To List</a>
                     </div>
                 </div>
             </div>

@@ -17,9 +17,10 @@ namespace VynilVerse.DataAccess.Repository
             dbSet = _context.Set<T>();
         }
 
-        public async Task Add(T entity)
+        public async Task AddEntityAsync(T entity)
         {
             await dbSet.AddAsync(entity);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<T> GetAsync(Expression<Func<T, bool>> filter, string? includeProperties = null, bool tracked = false)

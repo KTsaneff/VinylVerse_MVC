@@ -1,6 +1,6 @@
 ﻿@model List<AlbumAdminAllDto>
 
-<div class="card shadow border-0 mt-4">
+<div class="card shadow border-0 my-4">
     <div class="card-header bg-secondary bg-gradient m-lg-0 py-3">
         <div class="row">
             <div class="col-12 text-center">
@@ -26,8 +26,11 @@
                     <th>
                         Artist
                     </th>
-                    <th>
-
+                    <th class="text-center">
+                        Cover Image
+                    </th>
+                    <th class="text-center">
+                        Actions
                     </th>
                 </tr>
             </thead>
@@ -37,26 +40,34 @@
                     <tr>
                         <td>@album.Title</td>
                         <td>@album.ArtistName</td>
-                        <td class="align-middle">
-                            <img src="@album.CoverImageUrl" alt="Album Image" style="max-width: 100px; max-height: 100px;" />
-                        </td>
-                        <td>
-                            <div class="w-75 btn-group" role="group">
-                                <a asp-controller="Album" asp-action="Edit" asp-route-id="@album.Id" class="btn btn-primary mx-2">
-                                    <i class="bi bi-pencil-square"></i> Edit
-                                </a>
-                                <a asp-controller="Album" asp-action="Delete" asp-route-id="@album.Id" class="btn btn-danger mx-2">
-                                    <i class="bi bi-x-square"></i> Delete
-                                </a>
+                        <td class="text-center align-middle">
+                            <div style="width: 100px; height: 100px; border: 1px solid #ddd; display: inline-block; padding: 2px;">
+                                <img src="@album.CoverImageUrl" alt="Album Image" class="rounded img-fluid" style="max-width: 100%; max-height: 100%; display: block; margin: auto;">
                             </div>
                         </td>
+                        <td>
+                            <div class="row w-100 mx-0">
+                                <div class="col px-1">
+                                    <a asp-controller="Album" asp-action="Details" asp-route-id="@album.Id" class="btn btn-secondary w-100">
+                                        <i class="bi bi-info-circle"></i> Details
+                                    </a>
+                                </div>
+                                <div class="col px-1">
+                                    <a asp-controller="Album" asp-action="Edit" asp-route-id="@album.Id" class="btn btn-primary w-100">
+                                        <i class="bi bi-pencil-square"></i> Edit
+                                    </a>
+                                </div>
+                                <div class="col px-1">
+                                    <a asp-controller="Album" asp-action="Delete" asp-route-id="@album.Id" class="btn btn-danger w-100">
+                                        <i class="bi bi-x-square"></i> Delete
+                                    </a>
+                                </div>
+                            </div>
+                        </td>
+
                     </tr>
                 }
             </tbody>
         </table>
     </div>
-</div>
-
-<div class="container">
-   
 </div>

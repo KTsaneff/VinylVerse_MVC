@@ -12,12 +12,12 @@ namespace VynilVerse.Models.DTOs
         [Range(1, int.MaxValue)]
         public int ArtistId { get; set; }
 
-        public virtual IEnumerable<ArtistSelectDto> Artists { get; set; } = null!;
+        public virtual IEnumerable<ArtistSelectDto> Artists { get; set; } = new List<ArtistSelectDto>();
 
         [Range(1, int.MaxValue)]
         public int GenreId { get; set; }
 
-        public virtual IEnumerable<GenreSelectDto> Genres { get; set; } = null!;
+        public virtual IEnumerable<GenreSelectDto> Genres { get; set; } = new List<GenreSelectDto>();
 
         [Range(Validate.ReleaseYearMinValue, Validate.ReleaseYearMaxValue)]
         public int YearOfRelease { get; set; }

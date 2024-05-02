@@ -8,7 +8,7 @@ namespace VynilVerse.DataAccess.Repository.Contracts
 
         Task<T> GetAsync(Expression<Func<T, bool>> filter, string? includeProperties = null, bool tracked = false);
 
-        Task Add(T entity);
+        Task AddEntityAsync(T entity);
 
         void Remove(T entity);
 

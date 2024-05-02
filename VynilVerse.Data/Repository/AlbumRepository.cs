@@ -14,6 +14,26 @@ namespace VynilVerse.DataAccess.Repository
             _context = context;
         }
 
+        public async Task AddNewAlbumAsync(AlbumAdminCreateDto album)
+        {
+            Album newAlbum = new Album
+            {
+                Title = album.Title,
+                ArtistId = album.ArtistId,
+                GenreId = album.GenreId,
+                YearOfRelease = album.YearOfRelease,
+                CoverImageUrl = album.CoverImageUrl,
+                Description = album.Description,
+                Price = album.Price,
+                Quantity = album.Quantity,
+                Rating = album.Rating,
+                TrackList = album.Tracks
+            };
+
+            await _context.Albums.AddAsync(newAlbum);
+            await _context.SaveChangesAsync();
+        }
+
         public async Task<IEnumerable<AlbumAdminAllDto>> AllAdminViewDtosAsync()
         {
             IEnumerable<AlbumAdminAllDto> albums = await _context.Albums
@@ -63,6 +83,7 @@ namespace VynilVerse.DataAccess.Repository
                     Id = a.Id,
                     Name = a.Name
                 })
+                .OrderBy(a => a.Name)
                 .ToListAsync();
 
             IEnumerable<GenreSelectDto> genres = await _context.Genres
@@ -71,9 +92,10 @@ namespace VynilVerse.DataAccess.Repository
                     Id = g.Id,
                     Name = g.Name
                 })
+                .OrderBy(g => g.Name)
                 .ToListAsync();
 
-            AlbumAdminCreateDto albumCreateDto = new AlbumAdminCreateDto
+            AlbumAdminCreateDto albumCreateDto = new()
             {
                 Artists = artists,
                 Genres = genres

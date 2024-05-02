@@ -50,21 +50,31 @@
 
                 // Create edit button
                 const editButton = document.createElement('button');
+                editButton.type = 'button'; // This is crucial to prevent it from submitting the form
                 editButton.textContent = 'Edit';
                 editButton.classList.add('btn', 'btn-outline-primary', 'btn-sm', 'me-2'); // Add Bootstrap button classes
-                editButton.addEventListener('click', function () {
-                    // Populate the modal input field with the current track title
-                    newTrackTitleInput.value = titleCell.textContent.toLowerCase(); // Convert track title to lowercase
+                editButton.addEventListener('click', function (event) {
+                    console.log("Edit button clicked:", new Date().toISOString()); // Adds timestamp to your log
+                    event.preventDefault();
+                    event.stopPropagation();
+                    console.log("Event default prevented and propagation stopped");
+                    newTrackTitleInput.value = titleCell.textContent.toLowerCase();
                     trackModal.style.display = 'block';
-                    newRow.classList.add('editing'); // Add editing class to identify the row being edited
+                    newRow.classList.add('editing');
+                    console.trace("Trace for edit button click"); // Adds a stack trace to your log
                 });
+
                 actionsCell.appendChild(editButton);
+
 
                 // Create remove button
                 const removeButton = document.createElement('button');
+                removeButton.type = 'button'; // Explicitly set the type to 'button' to prevent any form submission
                 removeButton.textContent = 'Remove';
                 removeButton.classList.add('btn', 'btn-outline-danger', 'btn-sm'); // Add Bootstrap button classes
-                removeButton.addEventListener('click', function () {
+                removeButton.addEventListener('click', function (event) {
+                    event.preventDefault(); // Prevent any default action, just as a precaution
+                    event.stopPropagation(); // Prevent the event from bubbling up to the row
                     // Remove the track row when remove button is clicked
                     trackListContainer.removeChild(newRow);
                 });
@@ -93,17 +103,17 @@
     });
 
     // Function to populate tracks input based on the Tracks property of AlbumCreateDto
-function populateTracksInput() {
-    // Get the input element for tracks
-    const tracksInput = document.getElementById('tracksInput');
+    function populateTracksInput() {
+        // Get the input element for tracks
+        const tracksInput = document.getElementById('tracksInput');
 
-    // Get the AlbumCreateDto object from the form
-    const albumDto = document.getElementById('albumForm').dataset.albumDto;
+        // Get the AlbumCreateDto object from the form
+        const albumDto = document.getElementById('albumForm').dataset.albumDto;
 
-    // Parse the JSON string to get the object
-    const album = JSON.parse(albumDto);
+        // Parse the JSON string to get the object
+        const album = JSON.parse(albumDto);
 
-    // Set the value of the input element to the tracks array joined with a comma
-    tracksInput.value = album.Tracks.join(',');
-}
+        // Set the value of the input element to the tracks array joined with a comma
+        tracksInput.value = album.Tracks.join(',');
+    }
 });

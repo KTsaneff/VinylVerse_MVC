@@ -25,12 +25,11 @@ namespace VinylVerseWeb.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Artist artist)
+        public async Task<IActionResult> Create(Artist artist)
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.Artist.Add(artist);
-                _unitOfWork.Save();
+                await _unitOfWork.Artist.AddEntityAsync(artist);
 
                 TempData["success"] = "Artist added successfully";
 

@@ -27,7 +27,7 @@ namespace VinylVerseWeb.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Genre genre)
+        public async Task<IActionResult> Create(Genre genre)
         {
             if (genre.Name != null && genre.Name.Any(char.IsDigit) && genre.Name.Any(char.IsPunctuation))
             {
@@ -36,8 +36,7 @@ namespace VinylVerseWeb.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-                _unitOfWork.Genre.Add(genre);
-                _unitOfWork.Save();
+                await _unitOfWork.Genre.AddEntityAsync(genre);
 
                 TempData["success"] = "Genre added successfully";
 

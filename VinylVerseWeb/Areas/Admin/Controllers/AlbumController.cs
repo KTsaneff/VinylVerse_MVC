@@ -24,19 +24,23 @@ namespace VinylVerseWeb.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            AlbumAdminCreateDto model = await _unitOfWork.Album.GetAlbumCreateDtoAsync();
-            return View(model);
+            AlbumAdminCreateDto album = await _unitOfWork.Album.GetAlbumCreateDtoAsync();
+            return View(album);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(AlbumAdminCreateDto model)
+        public async Task<IActionResult> Create(AlbumAdminCreateDto album)
         {
-            if(!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                return View(model);
+                await _unitOfWork.Album.AddNewAlbumAsync(album);
+
+                TempData["success"] = "Album added successfully";
+
+                return RedirectToAction("Index");
             }
 
-            throw new NotImplementedException();
+            return View(album);
         }
 
         public async Task<IActionResult> Edit(int? id)
@@ -93,7 +97,7 @@ namespace VinylVerseWeb.Areas.Admin.Controllers
         [HttpPost, ActionName("Delete")]
         public async Task<IActionResult> DeletePost(AlbumAdminDeleteDto deleteDto)
         {
-            if(deleteDto == null)
+            if (deleteDto == null)
             {
                 return NotFound();
             }

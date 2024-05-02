@@ -5,6 +5,7 @@ namespace VynilVerse.DataAccess.Repository.Contracts
 {
     public interface IAlbumRepository : IRepository<Album>
     {
+        Task AddNewAlbumAsync(AlbumAdminCreateDto album);
         Task<IEnumerable<AlbumAdminAllDto>> AllAdminViewDtosAsync();
         Task DeleteAlbumAsync(int id);
         Task EditAlbumAsync(AlbumAdminEditDto album);
