@@ -29,6 +29,13 @@ namespace VynilVerse.DataAccess.Repository
             return albums;
         }
 
+        public async Task DeleteAlbumAsync(int id)
+        {
+            Album album = _context.Albums.Find(id);
+            _context.Albums.Remove(album);
+            await _context.SaveChangesAsync();
+        }
+
         public async Task EditAlbumAsync(AlbumAdminEditDto album)
         {
             Album albumToEdit = await _context.Albums.FindAsync(album.Id);
@@ -117,6 +124,19 @@ namespace VynilVerse.DataAccess.Repository
             };
 
             return albumEditDto;
+        }
+
+        public async Task<AlbumAdminDeleteDto> GetDeleteDtoAsync(int? id)
+        {
+            Album album = await _context.Albums.FirstOrDefaultAsync(a => a.Id == id);
+
+            AlbumAdminDeleteDto albumToDelete = new AlbumAdminDeleteDto
+            {
+                Id = album.Id,
+                Title = album.Title
+            };
+
+            return albumToDelete;
         }
 
         public async Task UpdateAsync(Album album)

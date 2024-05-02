@@ -27,6 +27,7 @@
         public const int CountryNameMaxLength = 50;
 
         //Regex
+        //TODO: Add Regex for Image URL
         //public const string ImageUrlRegex = @"^(https?://)?([\w-]+\.)+[\w-]+(/[\w-./?%&=]*)?$";
     }
 }

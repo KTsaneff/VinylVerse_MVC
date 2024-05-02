@@ -6,7 +6,9 @@ namespace VynilVerse.DataAccess.Repository
     public class UnitOfWork : IUnitOfWork
     {
         private ApplicationDbContext _context;
+
         public IGenreRepository Genre { get; private set; }
+
         public IAlbumRepository Album { get; private set; }
 
         public IArtistRepository Artist { get; private set; }
@@ -19,9 +21,9 @@ namespace VynilVerse.DataAccess.Repository
             Artist = new ArtistRepository(_context);
         }
 
-        public void Save()
+        public async Task Save()
         {
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
     }
 }

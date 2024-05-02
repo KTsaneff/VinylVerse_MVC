@@ -12,9 +12,10 @@ namespace VynilVerse.DataAccess.Repository
             _context = context;
         }
 
-        public void Update(Artist artist)
+        public async Task UpdateAsync(Artist artist)
         {
             _context.Artists.Update(artist);
+            await _context.SaveChangesAsync();
         }
     }
 }

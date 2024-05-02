@@ -13,9 +13,11 @@ namespace VynilVerse.DataAccess.Repository
         {
             _context = context;
         }
-        public void Update(Genre genre)
+
+        public async Task UpdateAsync(Genre genre)
         {
             _context.Genres.Update(genre);
+            await _context.SaveChangesAsync();
         }
     }
 }

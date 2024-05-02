@@ -68,7 +68,7 @@ namespace VinylVerseWeb.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.Genre.Update(genre);
+                _unitOfWork.Genre.UpdateAsync(genre);
                 _unitOfWork.Save();
 
                 TempData["success"] = "Genre updated successfully";

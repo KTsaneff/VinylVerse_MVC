@@ -71,5 +71,43 @@ namespace VinylVerseWeb.Areas.Admin.Controllers
             }
             return View(album);
         }
+
+
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+
+            AlbumAdminDeleteDto albumToDelete = await _unitOfWork.Album.GetDeleteDtoAsync(id);
+
+            if (albumToDelete == null)
+            {
+                return NotFound();
+            }
+
+            return View(albumToDelete);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeletePost(AlbumAdminDeleteDto deleteDto)
+        {
+            if(deleteDto == null)
+            {
+                return NotFound();
+            }
+
+            Album albumToDelete = await _unitOfWork.Album.GetAsync(x => x.Id == deleteDto.Id);
+            if (albumToDelete == null)
+            {
+                return NotFound();
+            }
+
+            _unitOfWork.Album.Remove(albumToDelete);
+            await _unitOfWork.Save();
+
+            return RedirectToAction("Index");
+        }
     }
 }

@@ -8,6 +8,6 @@
 
         IArtistRepository Artist { get; }
 
-        void Save();
+        Task Save();
     }
 }

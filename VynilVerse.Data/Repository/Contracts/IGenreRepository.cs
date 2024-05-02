@@ -4,6 +4,6 @@ namespace VynilVerse.DataAccess.Repository.Contracts
 {
     public interface IGenreRepository : IRepository<Genre>
     {
-        void Update(Genre genre);
+        Task UpdateAsync(Genre genre);
     }
 }

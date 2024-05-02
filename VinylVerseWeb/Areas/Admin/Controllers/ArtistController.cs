@@ -60,7 +60,7 @@ namespace VinylVerseWeb.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.Artist.Update(artist);
+                _unitOfWork.Artist.UpdateAsync(artist);
                 _unitOfWork.Save();
 
                 TempData["success"] = "Artist updated successfully";
@@ -103,7 +103,7 @@ namespace VinylVerseWeb.Areas.Admin.Controllers
             }
 
             _unitOfWork.Artist.Remove(artistToDelete);
-            _unitOfWork.Save();
+             await _unitOfWork.Save();
 
             TempData["success"] = "Artist deleted successfully";
 
