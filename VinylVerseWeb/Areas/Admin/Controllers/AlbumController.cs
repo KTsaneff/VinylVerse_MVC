@@ -15,9 +15,9 @@ namespace VinylVerseWeb.Areas.Admin.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            List<Album> albums = _unitOfWork.Album.GetAll().ToList();
+            List<AlbumAdminAllDto> albums = (List<AlbumAdminAllDto>)await _unitOfWork.Album.AllAdminViewDtosAsync();
             return View(albums);
         }
 

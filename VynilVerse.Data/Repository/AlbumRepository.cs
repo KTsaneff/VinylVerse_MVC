@@ -14,6 +14,20 @@ namespace VynilVerse.DataAccess.Repository
             _context = context;
         }
 
+        public async Task<IEnumerable<AlbumAdminAllDto>> AllAdminViewDtosAsync()
+        {
+            IEnumerable<AlbumAdminAllDto> albums = await _context.Albums
+                .Select(a => new AlbumAdminAllDto
+                {
+                    Id = a.Id,
+                    Title = a.Title,
+                    ArtistName = a.Artist.Name,
+                    CoverImageUrl = a.CoverImageUrl
+                })
+                .ToListAsync();
+            return albums;
+        }
+
         public async Task<AlbumCreateDto> GetAlbumCreateDtoAsync()
         {
             IEnumerable<ArtistSelectDto> artists = await _context.Artists

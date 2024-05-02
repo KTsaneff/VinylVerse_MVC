@@ -1,4 +1,4 @@
-﻿@model List<Album>
+﻿@model List<AlbumAdminAllDto>
 
 <div class="card shadow border-0 mt-4">
     <div class="card-header bg-secondary bg-gradient m-lg-0 py-3">
@@ -36,7 +36,10 @@
                 {
                     <tr>
                         <td>@album.Title</td>
-                        <td>@album.Artist</td>
+                        <td>@album.ArtistName</td>
+                        <td class="align-middle">
+                            <img src="@album.CoverImageUrl" alt="Album Image" style="max-width: 100px; max-height: 100px;" />
+                        </td>
                         <td>
                             <div class="w-75 btn-group" role="group">
                                 <a asp-controller="Album" asp-action="Edit" asp-route-id="@album.Id" class="btn btn-primary mx-2">
