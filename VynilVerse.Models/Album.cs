@@ -36,6 +36,16 @@ namespace VynilVerse.Models
         public decimal Price { get; set; }
 
         [Required]
+        [Display(Name = "Price for 50+")]
+        [Range(typeof(decimal), Validate.AlbumMinPrice, Validate.AlbumMaxPrice)]
+        public decimal Price50 { get; set; }
+
+        [Required]
+        [Display(Name = "Price for 100+")]
+        [Range(typeof(decimal), Validate.AlbumMinPrice, Validate.AlbumMaxPrice)]
+        public decimal Price100 { get; set; }
+
+        [Required]
         [Range(Validate.AlbumMinQuantity, Validate.AlbumMaxQuantity)]
         public int Quantity { get; set; }
 

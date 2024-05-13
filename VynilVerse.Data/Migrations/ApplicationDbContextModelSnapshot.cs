@@ -45,8 +45,16 @@ namespace VynilVerse.DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("Price")
-                        .HasPrecision(18, 4)
-                        .HasColumnType("decimal(18,4)");
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("Price100")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("Price50")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
@@ -79,10 +87,12 @@ namespace VynilVerse.DataAccess.Migrations
                         {
                             Id = 1,
                             ArtistId = 1,
-                            CoverImageUrl = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.thisisdig.com%2Ffeature%2Fcalifornication-red-hot-chili-peppers-album%2F&psig=AOvVaw2_uxpUxmYM3PrzgBJ0stid&ust=1709904223869000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCPjrvOCf4oQDFQAAAAAdAAAAABAI",
+                            CoverImageUrl = "https://i.discogs.com/3hPxEdlaArkKnI2FmcNqsHLI5k6mUVdlSOVHVFvvpPk/rs:fit/g:sm/q:90/h:600/w:589/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTcyNzMz/OS0xNDM5MDQ1Mzk4/LTkyOTguanBlZw.jpeg",
                             Description = "Californication is the seventh studio album by American rock band Red Hot Chili Peppers.",
                             GenreId = 1,
                             Price = 55.99m,
+                            Price100 = 45.99m,
+                            Price50 = 50.99m,
                             Quantity = 150,
                             Rating = 8.1999999999999993,
                             Title = "Californication",
@@ -93,10 +103,12 @@ namespace VynilVerse.DataAccess.Migrations
                         {
                             Id = 2,
                             ArtistId = 2,
-                            CoverImageUrl = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.amazon.com%2FIts-Time-Michael-Buble%2Fdp%2FB00074CC1Y&psig=AOvVaw2D9Z8n5Dzrz52WpaYfQBhE&ust=1709905597761000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCOjxw--k4oQDFQAAAAAdAAAAABAE",
+                            CoverImageUrl = "https://m.media-amazon.com/images/I/61iUTlo0r5L._UF1000,1000_QL80_.jpg",
                             Description = "It's Time is the fourth studio album by Canadian singer Michael Bublé. It was released on February 8, 2005, by 143 Records and Reprise Records. With arrangements by David Foster, the album contains cover versions of songs from traditional contemporary pop: George Gershwin, Cole Porter, Stevie Wonder, and The Beatles, as well as the original song \"Home\", which was co-written by Bublé.",
                             GenreId = 3,
                             Price = 24.99m,
+                            Price100 = 14.99m,
+                            Price50 = 19.99m,
                             Quantity = 100,
                             Rating = 7.5,
                             Title = "It's Time",
@@ -111,6 +123,8 @@ namespace VynilVerse.DataAccess.Migrations
                             Description = "Abbey Road is the eleventh studio album by the English rock band the Beatles, released on 26 September 1969 by Apple Records. The recording sessions for the album were the last in which all four Beatles participated. Although Let It Be was the final album that the Beatles completed before the band's dissolution in April 1970, most of the album had been recorded before the Abbey Road sessions began.",
                             GenreId = 1,
                             Price = 39.99m,
+                            Price100 = 29.99m,
+                            Price50 = 34.99m,
                             Quantity = 500,
                             Rating = 9.5,
                             Title = "Abbey Road",
@@ -125,6 +139,8 @@ namespace VynilVerse.DataAccess.Migrations
                             Description = "Thriller is the sixth studio album by American singer Michael Jackson, released on November 30, 1982, by Epic Records. Reunited with Off the Wall producer Quincy Jones, Jackson was inspired to create an album where every song was a killer. With the ongoing backlash against disco, Jackson moved in a new musical direction, incorporating pop, post-disco, rock, funk, and R&B.",
                             GenreId = 2,
                             Price = 49.99m,
+                            Price100 = 39.99m,
+                            Price50 = 44.99m,
                             Quantity = 300,
                             Rating = 9.8000000000000007,
                             Title = "Thriller",
@@ -135,10 +151,12 @@ namespace VynilVerse.DataAccess.Migrations
                         {
                             Id = 5,
                             ArtistId = 5,
-                            CoverImageUrl = "https://upload.wikimedia.org/wikipedia/en/5/5e/Elvis_Presley_album_cover.jpg",
+                            CoverImageUrl = "https://m.media-amazon.com/images/I/6115u83KaTL._UF1000,1000_QL80_.jpg",
                             Description = "Elvis Presley is the debut studio album by American rock and roll singer Elvis Presley. It was released on RCA Victor, in mono, catalogue number LPM 1254, in March 1956. The recording sessions took place on January 10 and January 11 at the RCA Victor recording studios in Nashville, Tennessee, and on January 30 and January 31 at the RCA Victor studios in New York.",
                             GenreId = 19,
                             Price = 29.99m,
+                            Price100 = 19.99m,
+                            Price50 = 24.99m,
                             Quantity = 200,
                             Rating = 9.0,
                             Title = "Elvis Presley",
@@ -246,7 +264,7 @@ namespace VynilVerse.DataAccess.Migrations
                         new
                         {
                             Id = 11,
-                            ArtistImageUrl = "https://static.wikia.nocookie.net/disney/images/4/44/David_Bowie.jpg/revision/latest?cb=20231217194435",
+                            ArtistImageUrl = "https://media.vanityfair.com/photos/56935aff030e898e45417924/16:9/w_1280,c_limit/david-bowie-dies-cancer-69.jpg",
                             Country = "USA",
                             Name = "David Bowie"
                         },

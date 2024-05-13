@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using VynilVerse.DataAccess.Repository.Contracts;
 using VynilVerse.Models;
 using VynilVerse.Models.DTOs;
@@ -18,6 +19,15 @@ namespace VinylVerseWeb.Areas.Admin.Controllers
         public async Task<IActionResult> Index()
         {
             List<AlbumAdminAllDto> albums = (List<AlbumAdminAllDto>)await _unitOfWork.Album.AllAdminViewDtosAsync();
+
+            IEnumerable<SelectListItem> genreList = await _unitOfWork.Genre
+                .GetAllAsync()
+                .Select(x => new SelectListItem
+                {
+                    Text = x.Name,
+                    Value = x.Id.ToString()
+                });
+
             return View(albums);
         }
 

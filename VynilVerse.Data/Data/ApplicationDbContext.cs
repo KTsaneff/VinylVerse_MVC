@@ -42,7 +42,15 @@ namespace VynilVerse.DataAccess.Data
 
             modelBuilder.Entity<Album>()
                 .Property(a => a.Price)
-                .HasPrecision(18, 4);
+                .HasPrecision(18, 2);
+
+            modelBuilder.Entity<Album>()
+                .Property(a => a.Price50)
+                .HasPrecision(18, 2);
+
+            modelBuilder.Entity<Album>()
+                .Property(a => a.Price100)
+                .HasPrecision(18, 2);
 
             modelBuilder.ApplyConfiguration(new GenreEntityConfiguration());
             modelBuilder.ApplyConfiguration(new ArtistEntityConfiguration());
