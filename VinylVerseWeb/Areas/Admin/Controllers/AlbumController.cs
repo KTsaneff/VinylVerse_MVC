@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using VynilVerse.DataAccess.Repository.Contracts;
 using VynilVerse.Models;
 using VynilVerse.Models.DTOs;
@@ -19,27 +18,27 @@ namespace VinylVerseWeb.Areas.Admin.Controllers
         public async Task<IActionResult> Index()
         {
             List<AlbumAdminAllDto> albums = (List<AlbumAdminAllDto>)await _unitOfWork.Album.AllAdminViewDtosAsync();
-
-            IEnumerable<SelectListItem> genreList = await _unitOfWork.Genre
-                .GetAllAsync()
-                .Select(x => new SelectListItem
-                {
-                    Text = x.Name,
-                    Value = x.Id.ToString()
-                });
-
             return View(albums);
         }
 
         [HttpGet]
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> Upsert(int? id)
         {
-            AlbumAdminCreateDto album = await _unitOfWork.Album.GetAlbumCreateDtoAsync();
+            AlbumAdminDto album;
+
+            if(id == null || id == 0)
+            {
+                album = await _unitOfWork.Album.GetAlbumDtoAsync(id);
+                return View(album);
+            }
+
+            album = await _unitOfWork.Album.GetAlbumDtoAsync(id);
+
             return View(album);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(AlbumAdminCreateDto album)
+        public async Task<IActionResult> Create(AlbumAdminDto album)
         {
             if (ModelState.IsValid)
             {
@@ -49,42 +48,46 @@ namespace VinylVerseWeb.Areas.Admin.Controllers
 
                 return RedirectToAction("Index");
             }
-
-            return View(album);
-        }
-
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null || id == 0)
+            else
             {
-                return NotFound();
-            }
-
-            int identifier = id.GetValueOrDefault();
-
-            AlbumAdminEditDto album = await _unitOfWork.Album.GetAlbumEditDtoAsync(identifier);
-
-            if (album == null)
-            {
-                return NotFound();
+               //album = await _unitOfWork.Album.GetAlbumDtoAsync();
             }
 
             return View(album);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Edit(AlbumAdminEditDto album)
-        {
-            if (ModelState.IsValid)
-            {
-                await _unitOfWork.Album.EditAlbumAsync(album);
+        //public async Task<IActionResult> Edit(int? id)
+        //{
+        //    if (id == null || id == 0)
+        //    {
+        //        return NotFound();
+        //    }
 
-                TempData["success"] = "Album updated successfully";
+        //    int identifier = id.GetValueOrDefault();
 
-                return RedirectToAction("Index");
-            }
-            return View(album);
-        }
+        //    //AlbumAdminEditDto album = await _unitOfWork.Album.GetAlbumEditDtoAsync(identifier);
+
+        //    //if (album == null)
+        //    //{
+        //    //    return NotFound();
+        //    //}
+
+        //    //return View(album);
+        //}
+
+        //[HttpPost]
+        //public async Task<IActionResult> Edit(AlbumAdminEditDto album)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        await _unitOfWork.Album.EditAlbumAsync(album);
+
+        //        TempData["success"] = "Album updated successfully";
+
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View(album);
+        //}
 
 
         public async Task<IActionResult> Delete(int? id)

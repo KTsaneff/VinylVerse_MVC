@@ -14,7 +14,7 @@ namespace VynilVerse.DataAccess.Repository
             _context = context;
         }
 
-        public async Task AddNewAlbumAsync(AlbumAdminCreateDto album)
+        public async Task AddNewAlbumAsync(AlbumAdminDto album)
         {
             Album newAlbum = new Album
             {
@@ -56,7 +56,7 @@ namespace VynilVerse.DataAccess.Repository
             await _context.SaveChangesAsync();
         }
 
-        public async Task EditAlbumAsync(AlbumAdminEditDto album)
+        public async Task EditAlbumAsync(AlbumAdminDto album)
         {
             Album albumToEdit = await _context.Albums.FindAsync(album.Id);
 
@@ -75,77 +75,88 @@ namespace VynilVerse.DataAccess.Repository
             _context.SaveChanges();
         }
 
-        public async Task<AlbumAdminCreateDto> GetAlbumCreateDtoAsync()
+        public async Task<AlbumAdminDto> GetAlbumDtoAsync(int? id)
         {
-            IEnumerable<ArtistSelectDto> artists = await _context.Artists
-                .Select(a => new ArtistSelectDto
-                {
-                    Id = a.Id,
-                    Name = a.Name
-                })
-                .OrderBy(a => a.Name)
-                .ToListAsync();
+            IEnumerable<ArtistSelectDto> artists = await GetArtistsAsync();
+            IEnumerable<GenreSelectDto> genres = await GetGenresAsync();
 
-            IEnumerable<GenreSelectDto> genres = await _context.Genres
-                .Select(g => new GenreSelectDto
-                {
-                    Id = g.Id,
-                    Name = g.Name
-                })
-                .OrderBy(g => g.Name)
-                .ToListAsync();
+            AlbumAdminDto albumDto;
 
-            AlbumAdminCreateDto albumCreateDto = new()
+            if (id == null)
             {
-                Artists = artists,
-                Genres = genres
-            };
-            return albumCreateDto;
+                 albumDto = new AlbumAdminDto
+                 {
+                     Artists = artists,
+                     Genres = genres
+                 };
+            }
+            else
+            {
+                Album album = await _context.Albums.FindAsync(id);
+
+                if (album == null)
+                {
+                    return null;
+                }
+
+                IEnumerable<ArtistSelectDto> artistsDto = await _context.Artists
+                    .Select(a => new ArtistSelectDto
+                    {
+                        Id = a.Id,
+                        Name = a.Name
+                    })
+                    .ToListAsync();
+
+                IEnumerable<GenreSelectDto> genresDto = await _context.Genres
+                    .Select(g => new GenreSelectDto
+                    {
+                        Id = g.Id,
+                        Name = g.Name
+                    })
+                    .ToListAsync();
+
+                albumDto = new()
+                {
+                    Id = album.Id,
+                    Title = album.Title,
+                    ArtistId = album.ArtistId,
+                    GenreId = album.GenreId,
+                    YearOfRelease = album.YearOfRelease,
+                    CoverImageUrl = album.CoverImageUrl,
+                    Description = album.Description,
+                    Price = album.Price,
+                    Quantity = album.Quantity,
+                    Rating = album.Rating,
+                    Tracks = album.TrackList,
+                    Artists = artistsDto,
+                    Genres = genresDto
+                };
+            }
+            return albumDto;
         }
 
-        public async Task<AlbumAdminEditDto> GetAlbumEditDtoAsync(int id)
+        private async Task<IEnumerable<ArtistSelectDto>> GetArtistsAsync()
         {
-            Album album = await _context.Albums.FindAsync(id);
+            return await _context.Artists
+                            .Select(a => new ArtistSelectDto
+                            {
+                                Id = a.Id,
+                                Name = a.Name
+                            })
+                            .OrderBy(a => a.Name)
+                            .ToListAsync();
+        }
 
-            if (album == null)
-            {
-                return null;
-            }
-
-            IEnumerable<ArtistSelectDto> artists = await _context.Artists
-                .Select(a => new ArtistSelectDto
-                {
-                    Id = a.Id,
-                    Name = a.Name
-                })
-                .ToListAsync();
-
-            IEnumerable<GenreSelectDto> genres = await _context.Genres
-                .Select(g => new GenreSelectDto
-                {
-                    Id = g.Id,
-                    Name = g.Name
-                })
-                .ToListAsync();
-
-            AlbumAdminEditDto albumEditDto = new AlbumAdminEditDto
-            {
-                Id = album.Id,
-                Title = album.Title,
-                ArtistId = album.ArtistId,
-                GenreId = album.GenreId,
-                YearOfRelease = album.YearOfRelease,
-                CoverImageUrl = album.CoverImageUrl,
-                Description = album.Description,
-                Price = album.Price,
-                Quantity = album.Quantity,
-                Rating = album.Rating,
-                Tracks = album.TrackList,
-                Artists = artists,
-                Genres = genres
-            };
-
-            return albumEditDto;
+        private async Task<IEnumerable<GenreSelectDto>> GetGenresAsync()
+        {
+            return await _context.Genres
+                            .Select(g => new GenreSelectDto
+                            {
+                                Id = g.Id,
+                                Name = g.Name
+                            })
+                            .OrderBy(g => g.Name)
+                            .ToListAsync();
         }
 
         public async Task<AlbumAdminDeleteDto> GetDeleteDtoAsync(int? id)

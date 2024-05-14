@@ -3,8 +3,10 @@ using VynilVerse.Utility;
 
 namespace VynilVerse.Models.DTOs
 {
-    public class AlbumAdminCreateDto
+    public class AlbumAdminDto
     {
+        public int? Id { get; set; }
+
         [Required]
         [MaxLength(Validate.AlbumTitleMaxLength)]
         public  string Title { get; set; } = null!;

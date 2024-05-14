@@ -17,7 +17,7 @@ namespace VinylVerseWeb.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            List<Genre> genres = _unitOfWork.Genre.GetAllAsync().OrderBy(g => g.Name).ToList();
+            List<Genre> genres = _unitOfWork.Genre.GetAll().OrderBy(g => g.Name).ToList();
             return View(genres);
         }
 
@@ -103,14 +103,14 @@ namespace VinylVerseWeb.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            if (_unitOfWork.Album.GetAllAsync().Any(a => a.GenreId == id))
+            if (_unitOfWork.Album.GetAll().Any(a => a.GenreId == id))
             {
                 TempData["error"] = "Cannot delete genre because it has associated albums.";
                 return RedirectToAction("Index");
             }
 
             _unitOfWork.Genre.Remove(genreToDelete);
-            _unitOfWork.Save();
+            await _unitOfWork.Save();
 
             TempData["success"] = "Genre deleted successfully";
 

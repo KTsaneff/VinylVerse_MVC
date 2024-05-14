@@ -1,4 +1,4 @@
-﻿@model AlbumAdminCreateDto
+﻿@model AlbumAdminDto
 
 <div class="card shadow border-0 my-4">
     <div class="card-header bg-secondary bg-gradient m-lg-0 py-3">
@@ -9,7 +9,7 @@
         </div>
     </div>
     <div class="card-body p-4">
-        <form method="post" class="row" id="albumForm" onsubmit="populateTracksInput()">
+        <form method="post" class="row" id="albumForm" onsubmit="populateTracksInput()" enctype="multipart/form-data">
             <div class="border p-3">
                 <div class="form-floating py-2 col-12">
                     <input asp-for="Title" class="form-control border-0 shadow" />
@@ -17,15 +17,15 @@
                     <span asp-validation-for="Title" class="text-danger"></span>
                 </div>
                 <div class="form-floating py-2 col-12">
-                    <select asp-for="@Model.ArtistId" aria-required="true" class="form-control border-0 shadow" asp-items="@(new SelectList(Model.Artists, "Id", "Name"))">
-                        <option>Please select an artist</option>
+                    <select asp-for="@Model.ArtistId" aria-required="true" class="form-select border-0 shadow" asp-items="@(new SelectList(Model.Artists, "Id", "Name"))">
+                        <option disabled selected>--Select Artist--</option>
                     </select>
                     <label asp-for="ArtistId" class="ms-2">Artist</label>
                     <span asp-validation-for="ArtistId" class="text-danger"></span>
                 </div>
                 <div class="form-floating py-2 col-12">
-                    <select asp-for="@Model.GenreId" aria-required="true" class="form-control border-0 shadow" asp-items="@(new SelectList(Model.Genres, "Id", "Name"))">
-                        <option>Please select a genre</option>
+                    <select asp-for="@Model.GenreId" aria-required="true" class="form-select border-0 shadow" asp-items="@(new SelectList(Model.Genres, "Id", "Name"))">
+                        <option disabled selected>--Select Genre--</option>
                     </select>
                     <label asp-for="GenreId" class="ms-2">Genre</label>
                     <span asp-validation-for="GenreId" class="text-danger"></span>
@@ -66,9 +66,8 @@
                     <span asp-validation-for="Rating" class="text-danger"></span>
                 </div>
                 <div class="form-floating py-2 col-12">
-                    <input asp-for="CoverImageUrl" class="form-control border-0 shadow" />
+                    <input type="file" class="form-control border-0 shadow" />
                     <label asp-for="CoverImageUrl" class="ms-2"></label>
-                    <span asp-validation-for="CoverImageUrl" class="text-danger"></span>
                 </div>
                 <div class="py-2 col-12">
                     <button type="button" id="addTrackButton" class="btn btn-sm btn-outline-primary mt-2">Add Track</button>

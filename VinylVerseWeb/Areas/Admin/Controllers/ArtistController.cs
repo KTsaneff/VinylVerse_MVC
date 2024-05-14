@@ -16,7 +16,7 @@ namespace VinylVerseWeb.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            List<Artist> artists = _unitOfWork.Artist.GetAllAsync().OrderBy(a => a.Name).ToList();
+            List<Artist> artists = _unitOfWork.Artist.GetAll().OrderBy(a => a.Name).ToList();
             return View(artists);
         }
         public IActionResult Create()
@@ -95,7 +95,7 @@ namespace VinylVerseWeb.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            if (_unitOfWork.Album.GetAllAsync().Any(a => a.ArtistId == id))
+            if (_unitOfWork.Album.GetAll().Any(a => a.ArtistId == id))
             {
                 TempData["error"] = "Cannot delete artist because it has associated albums.";
                 return RedirectToAction("Index");

@@ -48,7 +48,7 @@ namespace VynilVerse.DataAccess.Repository
             return await query.FirstOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>>? filter = null, string? includeProperties = null)
+        public IEnumerable<T> GetAll(Expression<Func<T, bool>>? filter = null, string? includeProperties = null)
         {
             IQueryable<T> query = dbSet;
 
@@ -65,7 +65,7 @@ namespace VynilVerse.DataAccess.Repository
                 }
             }
 
-            return await query.ToListAsync();
+            return query.ToList();
         }
 
         public void Remove(T entity)
